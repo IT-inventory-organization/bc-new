@@ -6,6 +6,7 @@ import ApprovalRequest from "@/views/Approval"
 import ApprovalReview from "@/views/Approval/review.vue"
 import UserList from "@/views/User/list.vue"
 import NewUser from "@/views/User/create.vue"
+import Login from "@/views/Login.vue"
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,16 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+    redirect: { name: "ApprovalRequest" },
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
+    path: "/register",
+    name: "register",
   },
   {
     path: "/plb",
@@ -74,32 +85,32 @@ const router = new VueRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   const token = localStorage.getItem("token_it_inventory");
-//   const reportId = localStorage.getItem("reportId");
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (!token) {
-//       next({
-//         path: "/login",
-//         query: { redirect: to.fullPath },
-//       });
-//     } else {
-//       next();
-//     }
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("token_it_inventory");
+  const reportId = localStorage.getItem("reportId");
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!token) {
+      next({
+        path: "/login",
+        query: { redirect: to.fullPath },
+      });
+    } else {
+      next();
+    }
 
-//     if (to.matched.some((record) => record.meta.reportId)) {
-//       if (!reportId) {
-//         next({
-//           path: "/plb",
-//           query: { redirect: to.fullPath },
-//         });
-//       } else {
-//         next();
-//       }
-//     }
-//   } else {
-//     next();
-//   }
-// });
+    if (to.matched.some((record) => record.meta.reportId)) {
+      if (!reportId) {
+        next({
+          path: "/plb",
+          query: { redirect: to.fullPath },
+        });
+      } else {
+        next();
+      }
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;
