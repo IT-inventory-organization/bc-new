@@ -39,15 +39,15 @@ export default {
   name: 'AppBar',
   components: {
     NavMenu
+  },
+  data: () => ({}),
+  methods: {
+    handleLogout () {
+      localStorage.clear()
+      this.$store.commit('SET_TOKEN', '')
+      this.$router.push('/login')
+    }
   }
-  // data: () => ({}),
-  // methods: {
-  //   handleLogout () {
-  //     localStorage.clear()
-  //     this.$store.commit('SET_TOKEN', '')
-  //     this.$router.push('/login')
-  //   }
-  // }
 }
 </script>
 

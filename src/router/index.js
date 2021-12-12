@@ -1,7 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import PLB from "@/views/Plb"
+import PLBView from "@/views/Plb/review.vue"
 import Inventory from "@/views/Inventory"
+import InventoryView from "@/views/Inventory/ProduksiBarang"
 import ApprovalRequest from "@/views/Approval"
 import ApprovalReview from "@/views/Approval/review.vue"
 import UserList from "@/views/User/list.vue"
@@ -38,9 +40,25 @@ const routes = [
     },
   },
   {
+    path: "/plb-view",
+    name: "PLBView",
+    component: PLBView,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/inventory",
     name: "Inventory",
     component: Inventory,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/inventory-view",
+    name: "ProduksiBarang",
+    component: InventoryView,
     meta: {
       requiresAuth: true,
     },

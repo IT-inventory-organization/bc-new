@@ -20,6 +20,9 @@
     <div class="it-inventory-box mt-2">
       <v-data-table
         :headers="headers"
+        :items="reports.data"
+        :options.sync="optionsTableReports"
+        :server-items-length="reports.data_size"
         no-data-text="Data not available"
         no-results-text="Data not available"
         class="it-inventory-simple-table"
@@ -28,26 +31,9 @@
           {{ props.index + 1 }}
         </template>
         <template v-slot:[`item.action`]>
-          <v-menu offset-y>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn class="it-inventory-actions-btn" outlined v-bind="attrs" v-on="on">
-                Actions
-                <v-icon right> mdi-chevron-down </v-icon>
-              </v-btn>
-            </template>
-
-            <v-list class="it-inventory-actions-list">
-              <v-list-item @click="handleViewPurchaseOrder">
-                <v-list-item-title>
-                  <Icon
-                    icon="fluent:apps-list-detail-20-regular"
-                    class="v-icon--left it-inventory-action-list__icon"
-                  />
-                  View
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+          <v-btn class="it-inventory-actions-btn" outlined @click="viewDocPlb">
+            View
+          </v-btn>
         </template>
       </v-data-table>
     </div>
@@ -78,23 +64,23 @@ export default {
         },
         {
           text: 'Jenis Pemberitahuan',
-          value: 'jenis_pemberitahuan',
+          value: 'jenisPemberitahuan',
         },
         {
           text: 'Jenis Dokumen',
-          value: 'jenis_dokumen',
+          value: 'jenisDokumen',
         },
         {
           text: 'Nomor Dokumen',
-          value: 'nomor_dokumen',
+          value: 'nomorDokumen',
         },
         {
           text: 'Voyage Kapal',
-          value: 'voyage',
+          value: 'voyageKapal',
         },
         {
           text: 'Nama Kapal',
-          value: 'nama_kapal',
+          value: 'namaKapal',
         },
         {
           text: 'Bendera',
@@ -115,7 +101,24 @@ export default {
       deep: true,
     },
   },
-  computed: {},
+  computed: {
+    reports() {
+      return this.$store.state.plb.reports;
+    },
+    optionsTableReports: {
+      get() {
+        return this.$store.state.plb.optionsTableReports;
+      },
+      set(val) {
+        this.$store.commit("SET_OPTIONS_TABLE_REPORTS", val);
+      },
+    },
+  },
+  methods: {
+    viewDocPlb() {
+      this.$router.push({ name: "PLBView" })
+    }
+  }
 };
 </script>
 
