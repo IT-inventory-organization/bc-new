@@ -7,6 +7,8 @@ import InventoryView from "@/views/Inventory/ProduksiBarang"
 import ApprovalRequest from "@/views/Approval"
 import ApprovalReview from "@/views/Approval/review.vue"
 import UserList from "@/views/User/list.vue"
+import EditUser from "@/views/User/edit.vue"
+import ViewUser from "@/views/User/view.vue"
 import NewUser from "@/views/User/create.vue"
 import Login from "@/views/Login.vue"
 
@@ -91,6 +93,22 @@ const routes = [
     path: "/user-new",
     name: "NewUser",
     component: NewUser,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/user-edit",
+    name: "EditUser",
+    component: EditUser,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/user-view",
+    name: "ViewUser",
+    component: ViewUser,
     meta: {
       requiresAuth: true,
     },
