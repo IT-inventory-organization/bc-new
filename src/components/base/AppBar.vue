@@ -29,12 +29,13 @@
         </v-list>
       </v-menu>
     </header>
-    <nav-menu />
+    <nav-menu v-if="!isShowMenu" />
   </div>
 </template>
 <script>
 import NavMenu from './NavMenu'
 export default {
+  props: ['isShowMenu'],
   name: 'AppBar',
   components: {
     NavMenu

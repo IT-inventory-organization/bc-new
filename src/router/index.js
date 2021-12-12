@@ -1,5 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import PLB from "@/views/Plb"
+import Inventory from "@/views/Inventory"
+import ApprovalRequest from "@/views/Approval"
+import ApprovalReview from "@/views/Approval/review.vue"
+import UserList from "@/views/User/list.vue"
+import NewUser from "@/views/User/create.vue"
 
 Vue.use(VueRouter);
 
@@ -11,6 +17,54 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+  },
+  {
+    path: "/plb",
+    name: "PLB",
+    component: PLB,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/inventory",
+    name: "Inventory",
+    component: Inventory,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/approval-request",
+    name: "ApprovalRequest",
+    component: ApprovalRequest,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/approval-review",
+    name: "ApprovalReview",
+    component: ApprovalReview,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/user-list",
+    name: "UserList",
+    component: UserList,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/user-new",
+    name: "NewUser",
+    component: NewUser,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 

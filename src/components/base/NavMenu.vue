@@ -52,14 +52,8 @@ export default {
   data: () => ({
     menus: [
       {
-        name: 'DASHBOARD',
-        path: '/dashboard',
-        icon: 'icon-park-outline:dashboard',
-        isDropdown: false
-      },
-      {
         name: 'APPROVAL REQUEST',
-        path: '/po',
+        path: '/approval-request',
         icon: 'fluent:document-text-20-regular',
         isDropdown: false
       },
