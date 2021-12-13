@@ -54,8 +54,9 @@
                 :items="roles"
                 label="Role"
                 dense
-                solo
+                append-icon="mdi-chevron-down"
                 outlined
+                solo
               ></v-select>
             </v-col>
           </v-row>
@@ -92,6 +93,7 @@
               <v-select
                 :items="status"
                 label="Status"
+                append-icon="mdi-chevron-down"
                 dense
                 solo
                 outlined
@@ -146,7 +148,7 @@ export default {
   data() {
     return {
       roles: ["PLB", "BC"],
-      status: ["Active", "InActive"]
+      status: ["Active", "Inactive"]
     };
   },
   watch: {
@@ -184,7 +186,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .user {
   &-create {
     margin-top: 2rem;

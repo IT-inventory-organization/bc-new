@@ -4,6 +4,7 @@ import user from "@/store/user";
 import plb from "@/store/plb";
 import inventory from "@/store/inventory";
 import masterUser from "@/store/masterUser";
+import approval from "@/store/approval";
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     user,
     plb,
     inventory,
-    masterUser
+    masterUser,
+    approval
   },
 });
