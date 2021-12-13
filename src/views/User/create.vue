@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row no-gutters align="center">
-      <div @click="back">
+      <div @click="back" class="mr-2 ml-0">
         <v-icon right> mdi-chevron-left </v-icon>
       </div>
       <v-col cols="11" md="">
@@ -22,107 +22,120 @@
       </v-col>
     </v-row>
 
-    <v-row no-gutters width="100%" class="mt-5">
-      <v-col lg="5">
-        <v-row no-gutters>
-          <v-col cols="4">
-            <div class="mt-2">UserName</div>
-          </v-col>
-          <v-col cols="7">
-            <v-text-field
-              outlined
-              dense
-              v-model="name"
-              placeholder="Nama"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-col>
+    <div class="user-create">
+      <v-row no-gutters width="100%" class="mt-5" align="center">
+        <v-col lg="5">
+          <v-row no-gutters>
+            <v-col cols="4">
+              <div class="mt-2">Username</div>
+            </v-col>
+            <v-col cols="7">
+              <v-text-field
+                outlined
+                dense
+                v-model="name"
+                placeholder="Nama"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
 
-      <v-col lg="5">
-        <v-row no-gutters>
-          <v-col cols="4">
-            <div class="mt-2">Role</div>
-          </v-col>
-          <v-col cols="7">
-            <v-text-field
-              outlined
-              dense
-              v-model="name"
-              placeholder="Status"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+        <v-col lg="5">
+          <v-row no-gutters>
+            <v-col cols="4">
+              <div class="mt-2">Role</div>
+            </v-col>
+            <v-col
+              class="d-flex"
+              cols="7"
+              sm="7"
+            >
+              <v-select
+                :items="roles"
+                label="Role"
+                dense
+                solo
+                outlined
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
 
-    <v-row no-gutters width="100%">
-      <v-col lg="5">
-        <v-row no-gutters>
-          <v-col cols="4">
-            <div class="mt-2">Name</div>
-          </v-col>
-          <v-col cols="7">
-            <v-text-field
-              outlined
-              dense
-              v-model="name"
-              placeholder="Nama"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-col>
+      <v-row no-gutters width="100%">
+        <v-col lg="5">
+          <v-row no-gutters>
+            <v-col cols="4">
+              <div class="mt-2">Name</div>
+            </v-col>
+            <v-col cols="7">
+              <v-text-field
+                outlined
+                dense
+                v-model="name"
+                placeholder="Nama"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
 
-      <v-col lg="5">
-        <v-row no-gutters>
-          <v-col cols="4">
-            <div class="mt-2">Status</div>
-          </v-col>
-          <v-col cols="7">
-            <v-text-field
-              outlined
-              dense
-              v-model="name"
-              placeholder="Status"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+        <v-col lg="5">
+          <v-row no-gutters>
+            <v-col cols="4">
+              <div class="mt-2">Status</div>
+            </v-col>
+            <v-col
+              class="d-flex"
+              cols="7"
+              sm="7"
+            >
+              <v-select
+                :items="status"
+                label="Status"
+                dense
+                solo
+                outlined
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
 
-    <v-row no-gutters width="100%">
-      <v-col lg="5">
-        <v-row no-gutters>
-          <v-col cols="4">
-            <div class="mt-2">Password</div>
-          </v-col>
-          <v-col cols="7">
-            <v-text-field
-              outlined
-              dense
-              v-model="name"
-              placeholder="Password"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-col>
+      <v-row no-gutters width="100%">
+        <v-col lg="5">
+          <v-row no-gutters>
+            <v-col cols="4">
+              <div class="mt-2">Password</div>
+            </v-col>
+            <v-col cols="7">
+              <v-text-field
+                outlined
+                dense
+                v-model="name"
+                placeholder="Password"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
 
-      <v-col lg="5">
-        <v-row no-gutters>
-          <v-col cols="4">
-            <div class="mt-2">Company</div>
-          </v-col>
-          <v-col cols="7">
-            <v-text-field
-              outlined
-              dense
-              v-model="name"
-              placeholder="Company"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+        <v-col lg="5">
+          <v-row no-gutters>
+            <v-col cols="4">
+              <div class="mt-2">Company</div>
+            </v-col>
+            <v-col cols="7">
+              <v-text-field
+                outlined
+                dense
+                v-model="name"
+                placeholder="Company"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </div>
+
   </div>
 </template>
 
@@ -131,7 +144,10 @@ export default {
   name: 'NewUser',
   components: {},
   data() {
-    return {};
+    return {
+      roles: ["PLB", "BC"],
+      status: ["Active", "InActive"]
+    };
   },
   watch: {
     optionsTableReports: {
@@ -156,10 +172,10 @@ export default {
   },
   methods: {
     cancel() {
-      console.log('cancel');
+      this.$router.push({ name: 'UserList' });
     },
     save() {
-      console.log('save');
+      this.$router.push({ name: 'UserList' });
     },
     back() {
       this.$router.push({ name: 'UserList' });
@@ -168,4 +184,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.user {
+  &-create {
+    margin-top: 2rem;
+    border: 1px solid #EAEAEA;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 1rem 0rem 1rem 2rem;
+  }
+}
+
+.v-input__slot {
+  box-shadow: none !important;
+}
+</style>

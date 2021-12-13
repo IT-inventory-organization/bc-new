@@ -29,6 +29,11 @@
         <template v-slot:[`item.no`]="props">
           {{ props.index + 1 }}
         </template>
+        <template v-slot:[`item.status`]>
+          <div class="activeStatus">
+            Active
+          </div>
+        </template>
         <template v-slot:[`item.action`]>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
@@ -116,11 +121,11 @@ export default {
   },
   computed: {
     reports() {
-      return this.$store.state.plb.reports;
+      return this.$store.state.masterUser.reports;
     },
     optionsTableReports: {
       get() {
-        return this.$store.state.plb.optionsTableReports;
+        return this.$store.state.masterUser.optionsTableReports;
       },
       set(val) {
         this.$store.commit("SET_OPTIONS_TABLE_REPORTS", val);
@@ -141,4 +146,19 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.activeStatus {
+  background: #3CB774;
+  border-radius: 44px;
+  color: #FFFFFF;
+  font-size: 12px;
+  text-align: center;
+  width: 74px;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px 4px 12px;
+}
+</style>
