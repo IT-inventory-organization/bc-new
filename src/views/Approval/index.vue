@@ -60,6 +60,9 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$store.dispatch("getReportsMenunggu");
+  },
   watch: {
     optionsTableReports: {
       handler() {
