@@ -33,17 +33,15 @@ const user = {
   },
   actions: {
     async loginActionUser(context) {
-      console.log(`${baseUrl}/login`, "cek")
       try {
         context.commit("SET_ISLOADING", true);
         const result = await axios({
-          url: `${baseUrl}/login/bc`,
+          url: `${baseUrl}/login`,
           method: "POST",
           data: {
             dataLogin: AESEncrypt(context.state.user),
           },
         });
-        console.log(result)
         context.commit("SET_TOKEN", result.data.data);
         localStorage.setItem("token_it_inventory", result.data.data);
         context.commit("SET_USER", {
@@ -59,8 +57,8 @@ const user = {
         if (error.message === "Network Error") {
           Swal.fire("Tidak ada jaringan!", "", "error");
         }
-        const response = error.response.data;
-        if (!response.success) {
+        const response = error?.response?.data;
+        if (!response?.success) {
           Swal.fire("Gagal!", response.message, "error");
         }
       } finally {
