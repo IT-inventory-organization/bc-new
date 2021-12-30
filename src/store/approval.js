@@ -1,37 +1,63 @@
+import axios from "axios";
+import { AESDecrypt } from "@/helper/Encryption";
+const baseUrl = process.env.VUE_APP_BASE_URL;
+
 const approval = {
   state: {
-    reports: {
-      data: [
-        {
-          nomor: 1234567890,
-          exportir: "Harvey and Sons",
-          nomor_po: "PO-00001",
-          tanggal: "01-01-2021",
-        },
-        {
-          nomor: 1234567890,
-          exportir: "Kris Group",
-          nomor_po: "PO-00001",
-          tanggal: "01-01-2021",
-        },
-        {
-          nomor: 1234567890,
-          exportir: "Kunde, Dickens and Harber",
-          nomor_po: "PO-00001",
-          tanggal: "01-01-2021",
-        },
-      ],
+    loading: {
+      loadingReports: false,
     },
+    reports: [],
+    reportId: [],
     optionsTableReports: {
       page: 1,
       itemsPerPage: 10,
       search: "",
     },
-    
   },
   mutations: {
+    SET_LOADING_APPROVAL(state, payload) {
+      state.loading[payload.key] = payload.value;
+    },
+    SET_REPORTS(state, payload) {
+      state.reports = payload;
+    },
+    SET_REPORT_ID(state, payload) {
+      state.reportId = payload;
+    },
+    SET_OPTIONS_TABLE_REPORTS(state, payload) {
+      state.optionsTableReports = Object.assign({}, payload);
+    },
   },
-  actions: {},
+  actions: {
+    async getAllApproval(context) {
+      try {
+        context.commit("SET_LOADING_APPROVAL", {
+          key: "loadingReports",
+          value: true,
+        });
+        const result = await axios({
+          url: baseUrl + "/approval/getAllPerbaikan",
+          method: "GET",
+          headers: {
+            authorization:
+              "Bearer " + localStorage.getItem("token_it_inventory"),
+          },
+        });
+        const data = AESDecrypt(result.data.data);
+        if (result.data.success) {
+          context.commit("SET_REPORTS", data);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        context.commit("SET_LOADING_APPROVAL", {
+          key: "loadingReports",
+          value: false,
+        });
+      }
+    },
+  }, // action end
 };
 
 export default approval;

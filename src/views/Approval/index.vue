@@ -6,13 +6,19 @@
       </v-col>
     </v-row>
 
+    <div class="request">
+      <p class="req">Request List <span>120</span></p>
+      <p class="sub">Disetujui <span>43</span></p>
+      <p class="sub">Perbaikan <span>22</span></p>
+    </div>
+
     <!-- Data Tables  -->
     <div class="it-inventory-box mt-2">
       <v-data-table
         :headers="headers"
-        :items="reports.data"
+        :items="reports"
         :options.sync="optionsTableReports"
-        :server-items-length="reports.data_size"
+        :server-items-length="reports.length"
         no-data-text="Data not available"
         no-results-text="Data not available"
         class="it-inventory-simple-table"
@@ -21,7 +27,11 @@
           {{ props.index + 1 }}
         </template>
         <template v-slot:[`item.action`]>
-          <v-btn class="it-inventory-actions-btn" outlined @click="handleViewApproval">
+          <v-btn
+            class="it-inventory-actions-btn"
+            outlined
+            @click="handleViewApproval"
+          >
             View
           </v-btn>
         </template>
@@ -32,30 +42,30 @@
 
 <script>
 export default {
-  name: 'ApprovalRequest',
+  name: "ApprovalRequest",
   components: {},
   data() {
     return {
       headers: [
         {
-          text: 'Exportir/Pengusaha PLB/PDPLB',
-          value: 'exportir',
+          text: "Exportir/Pengusaha PLB/PDPLB",
+          value: "nama",
         },
         {
-          text: 'Nomor PO',
-          value: 'nomor_po',
+          text: "Nomor PO",
+          value: "nomorPO",
         },
         {
-          text: 'Tanggal',
-          value: 'tanggal',
+          text: "Tanggal",
+          value: "tanggal",
         },
         {
-          text: 'Nomor',
-          value: 'nomor',
+          text: "Nomor",
+          value: "nomorFormBcf3315",
         },
         {
-          text: 'Actions',
-          value: 'action',
+          text: "Actions",
+          value: "action",
         },
       ],
     };
@@ -63,7 +73,7 @@ export default {
   watch: {
     optionsTableReports: {
       handler() {
-        console.log('trigger change options table reports');
+        console.log("trigger change options table reports");
       },
       deep: true,
     },
@@ -83,10 +93,50 @@ export default {
   },
   methods: {
     handleViewApproval() {
-      this.$router.push({ name: 'ApprovalReview' });
-    }
+      this.$router.push({ name: "ApprovalReview" });
+    },
+  },
+  created() {
+    this.$store.dispatch("getAllApproval");
   },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.request {
+  display: flex;
+  margin: 2rem 0;
+  p {
+    margin-right: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  .req {
+    color: #0c66cf;
+    font-weight: 600;
+
+    span {
+      color: #fff;
+      background: #0c66cf;
+      font-size: 0.6em;
+      padding: 0.5em 0.7em;
+      margin-left: 0.5rem;
+      border-radius: 10px;
+    }
+  }
+  .sub {
+    color: #b3b3b3;
+    font-weight: 400;
+
+    span {
+      color: #fff;
+      background: #b3b3b3;
+      font-size: 0.6em;
+      padding: 0.5em 0.7em;
+      margin-left: 0.5rem;
+      border-radius: 10px;
+    }
+  }
+}
+</style>
